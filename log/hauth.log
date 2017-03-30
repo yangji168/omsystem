@@ -1,0 +1,17 @@
+2017/03/30 16:31:10 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/03/30 16:59:01 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/03/30 16:59:24 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/03/30 16:59:42 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 16:59:48 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:00:47 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:01:25 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:02:38 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:03:33 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:04:41 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:05:24 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:18:01 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/03/30 17:19:27 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:20:47 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:21:09 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/03/30 17:23:35 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/03/30 17:23:40 [E] [handlelogs.go:15] 写入日志信息失败 
