@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>九指天下运维平台</title>
+<title>运维平台</title>
 
     <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 
@@ -46,13 +46,13 @@
             <div id="h-login-form" class="pull-left" style="display: none; height: 50px; line-height: 50px;">
                 <form id='inputZoon' class="navbar-form navbar-right" style="height: 35px;line-height: 35px;">
                     <div class="form-group input-group-sm">
-                        <input name="username" value="demo" type="text" class="form-control"
+                        <input name="username" value="admin" type="text" class="form-control"
                                placeholder="账号">
                     </div>
                     &nbsp;
                     &nbsp;
                     <div class="form-group input-group-sm">
-                        <input name="password" value="123456" type="password" class="form-control"
+                        <input name="password" value="omsystem" type="password" class="form-control"
                                placeholder="密码">
                     </div>
                     &nbsp;
@@ -101,7 +101,6 @@
             <div class="col-sm-8 col-md-8 col-lg-8">
                 &nbsp;
                 <span style="color: #FFFFFF">
-
                     <p>beego基础开发</p>
                     <p>丰富的API接口</p>
                 </span>
@@ -109,17 +108,7 @@
 
         </div>
     </div>
-    <!--<div class="row" style="text-align: center; height: 120px;">
-        <div class="col-sm-4 col-md-4 col-lg-4">
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4" align="center">
-            <div onclick="OpenGithub()" class="h-github-source">
-                源码下载
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-        </div>
-    </div>-->
+
 </div>
 </body>
 <script type="text/javascript" src="/static/js/utils.js"></script>
@@ -207,7 +196,6 @@
     window.onresize = function () {
         $(".container-fluid").height(document.documentElement.clientHeight)
     };
-
 
 </script>
 </html>
