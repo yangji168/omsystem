@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/astaxie/beego/context"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/hauth/models"
 	"github.com/yangji168/omsystem/utils/hret"
 	"github.com/yangji168/omsystem/utils/logs"
@@ -64,8 +65,7 @@ func (this userRolesController) GetOtherRoles(ctx *context.Context) {
 // 这个函数接收一个指定的json字符串。
 func (this userRolesController) Auth(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -93,8 +93,7 @@ func (this userRolesController) Auth(ctx *context.Context) {
 // @(http request param) user_id role_id
 func (this userRolesController) Revoke(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 

@@ -19,6 +19,7 @@ type HomePageMenusModel struct {
 }
 
 func (this HomePageMenusModel) Get(id, typeId, useId string) ([]byte, error) {
+
 	var rst []HomePageMenusModel
 	rows, err := dbobj.Query(sys_rdbms_012, id, typeId, useId)
 	defer rows.Close()
@@ -33,6 +34,7 @@ func (this HomePageMenusModel) Get(id, typeId, useId string) ([]byte, error) {
 		return nil, err
 	}
 	return json.Marshal(rst)
+
 }
 
 func (this HomePageMenusModel) dfs(node []HomePageMenusModel, up_id string, rst *[]HomePageMenusModel) {

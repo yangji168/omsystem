@@ -7,9 +7,11 @@ import (
 
 	"github.com/astaxie/beego/context"
 	"github.com/yangji168/omsystem/hauth/models"
+	"github.com/yangji168/omsystem/utils/logs"
+
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/utils"
 	"github.com/yangji168/omsystem/utils/hret"
-	"github.com/yangji168/omsystem/utils/logs"
 	"github.com/yangji168/omsystem/utils/token/hjwt"
 )
 
@@ -62,13 +64,14 @@ func LoginSystem(ctx *context.Context) {
 		return
 	}
 
-	orgid, err := indexModels.GetDefaultDomainId(userId)
+	orgid, err := indexModels.GetDefaultOrgId(userId)
 	if err != nil {
 		logs.Error(userId, " 用户没有指定机构", err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 402, "can't get org id of user")
 		return
 	}
-	if ok, code, cnt, rmsg := models.CheckPasswd(userId, psd); ok {
+
+	if ok, code, cnt, rmsg := hrpc.CheckPasswd(userId, psd); ok {
 		token := hjwt.GenToken(userId, domainId, orgid, 86400)
 		cookie := http.Cookie{Name: "Authorization", Value: token, Path: "/", MaxAge: 86400}
 		http.SetCookie(ctx.ResponseWriter, &cookie)
@@ -80,7 +83,7 @@ func LoginSystem(ctx *context.Context) {
 }
 
 func LogoutSystem(ctx *context.Context) {
-	cookie := http.Cookie{Name: "Authorization", Value: "", Path: "/", MaxAge: 30}
+	cookie := http.Cookie{Name: "Authorization", Value: "", Path: "/", MaxAge: -1}
 	http.SetCookie(ctx.ResponseWriter, &cookie)
 	hret.WriteHttpOkMsgs(ctx.ResponseWriter, "logout system safely.")
 }

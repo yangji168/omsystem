@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/yangji168/omsystem/dbobj"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/utils/logs"
 )
 
@@ -128,7 +129,7 @@ func (ProjectMgr) Delete(js []ProjectMgr, user_id string, domain_id string) erro
 		}
 
 		if user_id != "admin" {
-			level := CheckDomainRights(user_id, val.Project_id)
+			level := hrpc.CheckDomainRights(user_id, val.Project_id)
 			if level != 2 {
 				tx.Rollback()
 				logs.Error("您没有权限删除这个域")

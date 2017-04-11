@@ -15,7 +15,6 @@ var homePageMenusModel = new(models.HomePageMenusModel)
 
 func HomePageMenus(ctx *context.Context) {
 	defer hret.HttpPanic()
-
 	typeId := ctx.Request.FormValue("TypeId")
 	Id := ctx.Request.FormValue("Id")
 
@@ -38,7 +37,6 @@ func HomePageMenus(ctx *context.Context) {
 
 func SubSystemEntry(ctx *context.Context) {
 	defer hret.HttpPanic()
-
 	ctx.Request.ParseForm()
 	id := ctx.Request.FormValue("Id")
 	cookie, _ := ctx.Request.Cookie("Authorization")

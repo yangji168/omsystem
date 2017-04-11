@@ -52,7 +52,6 @@ func IsRequestURI(rawurl string) bool {
 
 func IsURI(str string) bool {
 	relation := false
-
 	for idx, val := range str {
 		if val == '.' {
 			relation = true
@@ -60,8 +59,10 @@ func IsURI(str string) bool {
 		}
 		if val == '/' || val == '\\' {
 			if idx < len(str)-1 {
-				relation = true
-				continue
+				if str[idx+1] == '.' {
+					relation = true
+					continue
+				}
 			}
 		}
 
@@ -71,4 +72,11 @@ func IsURI(str string) bool {
 		return IsRequestURI(str[idx:])
 	}
 	return false
+}
+
+func IsMobilePhone(str string) bool {
+	if IsEmpty(str) {
+		return false
+	}
+	return rxMobolePhone.MatchString(str)
 }

@@ -6,10 +6,10 @@ import (
 	"github.com/astaxie/beego/context"
 
 	"github.com/yangji168/omsystem/hauth/hcache"
-	"github.com/yangji168/omsystem/hauth/models"
 
 	"github.com/tealeg/xlsx"
 	"github.com/yangji168/omsystem/dbobj"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/utils/hret"
 	"github.com/yangji168/omsystem/utils/logs"
 	"github.com/yangji168/omsystem/utils/token/hjwt"
@@ -35,8 +35,7 @@ var HandleLogsCtl = &HandleLogsController{}
 func (this *HandleLogsController) GetHandleLogPage(ctx *context.Context) {
 	ctx.Request.ParseForm()
 
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -51,8 +50,7 @@ func (this *HandleLogsController) GetHandleLogPage(ctx *context.Context) {
 func (HandleLogsController) Download(ctx *context.Context) {
 	ctx.Request.ParseForm()
 
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -130,8 +128,7 @@ func (HandleLogsController) Download(ctx *context.Context) {
 func (HandleLogsController) GetHandleLogs(ctx *context.Context) {
 	ctx.Request.ParseForm()
 
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -168,8 +165,7 @@ func (HandleLogsController) GetHandleLogs(ctx *context.Context) {
 func (HandleLogsController) SerachLogs(ctx *context.Context) {
 	ctx.Request.ParseForm()
 
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 

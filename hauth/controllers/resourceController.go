@@ -6,6 +6,7 @@ import (
 	"github.com/yangji168/omsystem/hauth/models"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/utils/hret"
 	"github.com/yangji168/omsystem/utils/logs"
 	"github.com/yangji168/omsystem/utils/validator"
@@ -30,8 +31,7 @@ var ResourceCtl = &resourceController{
 // 菜单资源子页面路由
 func (resourceController) Page(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -46,8 +46,7 @@ func (resourceController) Page(ctx *context.Context) {
 
 func (this resourceController) Get(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 	rst, err := this.models.Get()
@@ -85,8 +84,7 @@ func (this resourceController) QueryTheme(ctx *context.Context) {
 
 func (this resourceController) Post(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -260,8 +258,7 @@ func (this resourceController) Post(ctx *context.Context) {
 
 func (this resourceController) Delete(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -280,8 +277,7 @@ func (this resourceController) Delete(ctx *context.Context) {
 
 func (this resourceController) Update(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -304,8 +300,7 @@ func (this resourceController) Update(ctx *context.Context) {
 
 func (this resourceController) ConfigTheme(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -318,6 +313,10 @@ func (this resourceController) ConfigTheme(ctx *context.Context) {
 	res_by_color := ctx.Request.FormValue("res_by_color")
 	res_group_id := ctx.Request.FormValue("res_group_id")
 	res_sort_id := ctx.Request.FormValue("res_sort_id")
+
+	if govalidator.IsNull(res_sort_id) {
+		res_sort_id = "0"
+	}
 
 	flag := this.models.CheckThemeExists(theme_id, res_id)
 	if flag <= 0 {

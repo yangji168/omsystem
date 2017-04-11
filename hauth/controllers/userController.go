@@ -8,6 +8,7 @@ import (
 
 	"github.com/asaskevich/govalidator"
 	"github.com/yangji168/omsystem/hauth/hcache"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/hauth/models"
 	"github.com/yangji168/omsystem/utils"
 	"github.com/yangji168/omsystem/utils/logs"
@@ -42,8 +43,7 @@ func (userController) Page(ctx *context.Context) {
 	defer hret.HttpPanic()
 
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -61,8 +61,7 @@ func (userController) Page(ctx *context.Context) {
 // @(http request param) domain_id
 func (this userController) Get(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -83,7 +82,7 @@ func (this userController) Get(ctx *context.Context) {
 		domain_id = jclaim.Domain_id
 	}
 
-	if !models.CheckDomain(ctx, domain_id, "r") {
+	if !hrpc.CheckDomain(ctx, domain_id, "r") {
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, error_user_no_auth)
 		return
 	}
@@ -100,8 +99,7 @@ func (this userController) Get(ctx *context.Context) {
 
 func (this userController) Post(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -117,7 +115,7 @@ func (this userController) Post(ctx *context.Context) {
 		return
 	}
 
-	if !models.CheckDomain(ctx, domain_id, "w") {
+	if !hrpc.CheckDomain(ctx, domain_id, "w") {
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 421, error_user_no_auth)
 		return
 	}
@@ -179,7 +177,7 @@ func (this userController) Post(ctx *context.Context) {
 	}
 
 	//
-	if !govalidator.IsNumeric(userPhone) {
+	if !validator.IsMobilePhone(userPhone) {
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 419, error_user_phone_check)
 		return
 	}
@@ -195,8 +193,7 @@ func (this userController) Post(ctx *context.Context) {
 
 func (this userController) Delete(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -247,8 +244,7 @@ func (this userController) Search(ctx *context.Context) {
 // 修改用户信息
 func (this userController) Put(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -266,14 +262,14 @@ func (this userController) Put(ctx *context.Context) {
 		return
 	}
 
-	did, err := models.CheckDomainByUserId(user_id)
+	did, err := hrpc.CheckDomainByUserId(user_id)
 	if err != nil {
 		logs.Error(err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "No Auth")
 		return
 	}
 
-	if !models.CheckDomain(ctx, did, "w") {
+	if !hrpc.CheckDomain(ctx, did, "w") {
 		logs.Error(err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, error_user_modify_passwd)
 		return
@@ -299,7 +295,7 @@ func (this userController) Put(ctx *context.Context) {
 		return
 	}
 
-	if !govalidator.IsNumeric(phone) {
+	if !validator.IsMobilePhone(phone) {
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 421, "请填写手机号")
 		return
 	}
@@ -321,8 +317,7 @@ func (this userController) Download(ctx *context.Context) {
 // 修改用户密码
 func (this userController) ModifyPasswd(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -340,7 +335,7 @@ func (this userController) ModifyPasswd(ctx *context.Context) {
 		return
 	}
 
-	did, err := models.CheckDomainByUserId(user_id)
+	did, err := hrpc.CheckDomainByUserId(user_id)
 	if err != nil {
 		logs.Error(err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 421, "修改用户密码失败", err)
@@ -356,7 +351,7 @@ func (this userController) ModifyPasswd(ctx *context.Context) {
 	}
 
 	if did != jclaim.Domain_id && "admin" != jclaim.User_id {
-		level := models.CheckDomainRights(jclaim.User_id, did)
+		level := hrpc.CheckDomainRights(jclaim.User_id, did)
 		if level != 2 {
 			logs.Error(err)
 			hret.WriteHttpErrMsgs(ctx.ResponseWriter, 421, error_user_modify_passwd)
@@ -384,15 +379,14 @@ func (this userController) ModifyPasswd(ctx *context.Context) {
 // 修改用户锁状态
 func (this userController) ModifyStatus(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
 	user_id := ctx.Request.FormValue("userId")
 	status_id := ctx.Request.FormValue("userStatus")
 
-	did, err := models.CheckDomainByUserId(user_id)
+	did, err := hrpc.CheckDomainByUserId(user_id)
 	if err != nil {
 		logs.Error(err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 421, "修改用户锁状态失败", err)
@@ -412,7 +406,7 @@ func (this userController) ModifyStatus(ctx *context.Context) {
 		return
 	}
 
-	if !models.CheckDomain(ctx, did, "w") {
+	if !hrpc.CheckDomain(ctx, did, "w") {
 		logs.Error(err)
 		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 401, error_user_modify_passwd)
 		return

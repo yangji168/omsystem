@@ -6,16 +6,22 @@ import (
 )
 
 func registerRouter() {
-	beego.Get("/", controllers.IndexPage)
+
 	beego.Get("/HomePage", controllers.HomePage)
+
 	beego.Post("/login", controllers.LoginSystem)
+
 	beego.Any("/logout", controllers.LogoutSystem)
 
-	beego.Get("/v1/auth/main/menu", controllers.HomePageMenus)
+	beego.Post("/v1/auth/theme/update", controllers.ThemeCtl.Post)
+
+	beego.Get("/", controllers.IndexPage)
+
 	beego.Get("/v1/auth/index/entry", controllers.SubSystemEntry)
+	beego.Get("/v1/auth/main/menu", controllers.HomePageMenus)
 	beego.Post("/v1/auth/passwd/update", controllers.PasswdController.PostModifyPasswd)
 
-	// domain_info
+	//domain_info
 	beego.Get("/v1/auth/domain/share/page", controllers.DomainShareCtl.Page)
 	beego.Get("/v1/auth/domain/get", controllers.DomainCtl.GetDomainInfo)
 	beego.Post("/v1/auth/domain/post", controllers.DomainCtl.PostDomainInfo)
@@ -38,10 +44,10 @@ func registerRouter() {
 	beego.Get("/v1/auth/handle/logs/download", controllers.HandleLogsCtl.Download)
 
 	//org_info
-	beego.Get("/v1/auth/resource/org/get", controllers.OrgCtl.GetSysOrgInfo)
-	beego.Post("/v1/auth/resource/org/insert", controllers.OrgCtl.InsertOrgInfo)
-	beego.Put("/v1/auth/resource/org/update", controllers.OrgCtl.UpdateOrgInfo)
-	beego.Post("/v1/auth/resource/org/delete", controllers.OrgCtl.DeleteOrgInfo)
+	beego.Get("/v1/auth/resource/org/get", controllers.OrgCtl.Get)
+	beego.Post("/v1/auth/resource/org/insert", controllers.OrgCtl.Post)
+	beego.Put("/v1/auth/resource/org/update", controllers.OrgCtl.Update)
+	beego.Post("/v1/auth/resource/org/delete", controllers.OrgCtl.Delete)
 	beego.Get("/v1/auth/resource/org/download", controllers.OrgCtl.Download)
 	beego.Get("/v1/auth/relation/domain/org", controllers.OrgCtl.GetSubOrgInfo)
 	beego.Get("/v1/auth/domain/id", controllers.DomainCtl.GetDomainId)
@@ -86,12 +92,20 @@ func registerRouter() {
 
 	// help
 	beego.Get("/v1/help/system/help", controllers.HelpCtl.Page)
+	///////////////////////////////////////////////////////////////////////////
 
 	beego.Get("/v1/auth/HandleLogsPage", controllers.HandleLogsCtl.GetHandleLogPage)
 	beego.Get("/v1/auth/domain/page", controllers.DomainCtl.GetDomainInfoPage)
 	beego.Get("/v1/auth/batch/page", controllers.AuthroityCtl.GetBatchPage)
-	beego.Get("/v1/auth/resource/org/page", controllers.OrgCtl.GetOrgPage)
+	beego.Get("/v1/auth/resource/org/page", controllers.OrgCtl.Page)
 	beego.Get("/v1/auth/resource/page", controllers.ResourceCtl.Page)
 	beego.Get("/v1/auth/user/page", controllers.UserCtl.Page)
 	beego.Get("/v1/auth/role/page", controllers.RoleCtl.Page)
+
+	//beego.Post("/v1/auth/passwd/modify", controllers.PasswdController.AdminModifyPasswd)
+	//beego.Get("/v1/auth/roles/getted", controllers.AuthroityCtl.GetGettedRoles)
+	//beego.Get("/v1/auth/roles/canGrant", controllers.AuthroityCtl.CanGrantRoles)
+	//beego.Post("/v1/auth/batch/grant", controllers.AuthroityCtl.BatchGrants)
+	//beego.Get("/v1/auth/domain/share/unauth",controllers.DomainShareCtl.UnAuth)
+
 }

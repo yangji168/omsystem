@@ -15,7 +15,7 @@
 	<meta http-equiv="Cache" content="no-cache">
 
 
-	<title>运维平台</title>
+	<title>H 运维平台</title>
 	<link rel="stylesheet" href="/static/css/metro.css">
 	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/static/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
@@ -55,7 +55,7 @@
 	 style="margin-right:0px; background-size: cover; overflow: hidden;">
 	<div style="position: relative; height: 60px; text-align: left;">
 		<div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 30px;">
-			<h3 id="huuid" style="color: #ffffff; font-size: 23px; font-weight: 700; height: 60px; line-height: 60px;">运维平台</h3>
+			<h3 id="huuid" style="color: #ffffff; font-size: 23px; font-weight: 700; height: 60px; line-height: 60px;">H 运维平台</h3>
 		</div>
 		<div class="col-sm-6 col-md-6 col-lg-6" style="padding-left: 30px; text-align: right">
 			<span class="label label-primary" style="color: #ffffff; font-size: 14px; font-weight: 700; height: 60px; line-height: 60px;"><i class="icon-user"></i>&nbsp;{{.}}</span>
@@ -200,7 +200,7 @@
 
     //调整主菜单的长度和宽度
     $(document).ready(function(){
-        Hutils.initMenu(0,-1,"系统服务","监控服务","工程管理")
+        Hutils.initMenu(0,-1,"系统服务","监控与日志","发版管理")
         indexObj.adjustLocation()
         indexObj.bindEvents()
         NProgress.done();

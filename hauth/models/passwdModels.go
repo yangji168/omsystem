@@ -4,13 +4,14 @@ import (
 	"errors"
 
 	"github.com/yangji168/omsystem/dbobj"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 )
 
 type PasswdModels struct {
 }
 
 func (PasswdModels) UpdateMyPasswd(newPd, User_id, oriEn string) error {
-	flag, _, _, _ := CheckPasswd(User_id, oriEn)
+	flag, _, _, _ := hrpc.CheckPasswd(User_id, oriEn)
 	if !flag {
 		return errors.New("原密码不正确，请确认后重新输入")
 	}

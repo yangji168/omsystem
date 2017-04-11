@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego/context"
 	"github.com/yangji168/omsystem/hauth/hcache"
-	"github.com/yangji168/omsystem/hauth/models"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/utils/hret"
 )
 
@@ -15,8 +15,7 @@ var HelpCtl = &helpController{}
 func (this helpController) Page(ctx *context.Context) {
 	ctx.Request.ParseForm()
 
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 

@@ -4,6 +4,7 @@ import (
 	"html/template"
 
 	"github.com/astaxie/beego/context"
+	"github.com/yangji168/omsystem/hauth/hrpc"
 	"github.com/yangji168/omsystem/hauth/models"
 	"github.com/yangji168/omsystem/utils/hret"
 	"github.com/yangji168/omsystem/utils/logs"
@@ -25,8 +26,7 @@ var RoleAndResourceCtl = &roleAndResourceController{
 func (this roleAndResourceController) ResourcePage(ctx *context.Context) {
 	defer hret.HttpPanic()
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -45,8 +45,7 @@ func (this roleAndResourceController) ResourcePage(ctx *context.Context) {
 // 查询指定角色的资源信息
 func (this roleAndResourceController) GetResource(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 
@@ -77,8 +76,7 @@ func (this roleAndResourceController) GetResource(ctx *context.Context) {
 // 授权与撤权操作
 func (this roleAndResourceController) HandleResource(ctx *context.Context) {
 	ctx.Request.ParseForm()
-	if !models.BasicAuth(ctx) {
-		hret.WriteHttpErrMsgs(ctx.ResponseWriter, 403, "权限不足")
+	if !hrpc.BasicAuth(ctx) {
 		return
 	}
 	res_id := ctx.Request.FormValue("res_id")

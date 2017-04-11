@@ -1,9 +1,29 @@
-2017/04/07 11:47:09 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
-2017/04/07 11:47:09 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
-2017/04/07 11:52:11 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
-2017/04/07 11:52:11 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
-2017/04/07 11:52:14 [E] [handlelogs.go:15] 写入日志信息失败 
-2017/04/07 11:52:17 [E] [handlelogs.go:15] 写入日志信息失败 
-2017/04/07 11:53:41 [E] [handlelogs.go:15] 写入日志信息失败 
-2017/04/07 11:53:43 [E] [handlelogs.go:15] 写入日志信息失败 
-2017/04/07 11:53:49 [E] [handlelogs.go:15] 写入日志信息失败 
+2017/04/11 17:05:29 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:05:29 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:10:36 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:10:36 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:22:26 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:22:26 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:28:55 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:28:55 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:28:58 [E] [loginController.go:29] parase with claims failed. 
+2017/04/11 17:29:28 [D] [orgModels.go:34] get org info fromo cache. 
+2017/04/11 17:29:28 [D] [userModels.go:68] get data from cache. 
+2017/04/11 17:29:34 [D] [userController.go:234] vertex_root_join_vertex_root  
+2017/04/11 17:29:34 [D] [userModels.go:68] get data from cache. 
+2017/04/11 17:29:34 [D] [orgModels.go:34] get org info fromo cache. 
+2017/04/11 17:31:07 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:31:07 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:32:25 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:32:25 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:37:11 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:37:11 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:41:51 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:41:51 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
+2017/04/11 17:58:35 [D] [resourceModels.go:119] get data from cache 
+2017/04/11 17:59:02 [D] [resourceModels.go:119] get data from cache 
+2017/04/11 17:59:22 [D] [resourceModels.go:119] get data from cache 
+2017/04/11 18:04:22 [E] [resourceModels.go:313] sql: no rows in result set 
+2017/04/11 18:05:52 [D] [resourceModels.go:119] get data from cache 
+2017/04/11 18:17:52 [D] [logs.go:147] init log, platform log dir is : log/hauth.log 
+2017/04/11 18:17:52 [D] [logs.go:159] init log, platform log dir is : log/hauth.log 
